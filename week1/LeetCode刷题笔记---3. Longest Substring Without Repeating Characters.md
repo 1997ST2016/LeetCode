@@ -1,0 +1,62 @@
+### LeetCode刷题笔记---3、 Longest Substring Without Repeating Characters
+
+[题目来源]: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+1. **题目描述：**
+
+   ​	从给定的字符串s中找到其不含重复字母的最长子串，输出其长度。
+
+   ​	注意：找最长子串(连续的而一段)，而不是子序列（不一定是连续的一段）。
+
+2. **样例：**
+
+   ```
+   Example 1:
+   Input: "abcabcbb"
+   Output: 3 
+   Explanation: The answer is "abc", with the length of 3.
+   
+   Example 2:
+   Input: "bbbbb"
+   Output: 1
+   Explanation: The answer is "b", with the length of 1.
+   
+   Example 3:
+   Input: "pwwkew"
+   Output: 3
+   Explanation: The answer is "wke", with the length of 3. 
+                Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+   ```
+
+3. **算法：**
+
+   python
+
+   ​	从字符串开头往后找，发现有重复字母出现时，重新以当前的重复字母开始往后找，不断按上述步骤进行，直到找到满足题目要求的最长子串，输出其长度。
+
+   ​	python代码：
+
+   ```python
+   class Solution(object):
+       def lengthOfLongestSubstring(self, s):
+           """
+           :type s: str
+           :rtype: int
+           """
+           ls = 1
+           if len(s) == 0:
+               return 0
+           if len(s) == 1:
+               return 1
+           i = 1
+           curbegin = 0
+           while i < len(s):
+               cur = s.find(s[i],curbegin,i)
+               if cur != -1:
+                   ls = max(ls,i - curbegin)
+                   curbegin = cur + 1
+               i += 1
+           if s.find(s[len(s) - 1],curbegin,len(s) - 1) == -1:
+               return max(ls,len(s) - curbegin)
+           return ls
+   ```

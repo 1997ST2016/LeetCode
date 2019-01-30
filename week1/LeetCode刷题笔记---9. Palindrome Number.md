@@ -1,0 +1,49 @@
+### LeetCode刷题笔记---9. Palindrome Number
+
+[题目来源]: https://leetcode.com/problems/palindrome-number/
+
+1. **题目描述：**
+
+   ​	判断一个整型数是否为palindrome（若整数反转之后仍为原数，则是；反之不是）。
+
+   ​	注意：
+
+   ​		若数据为负，则一定不是。
+
+2. **样例：**
+
+   ```
+   Example 1:
+   Input: 121
+   Output: true
+   
+   Example 2:
+   Input: -121
+   Output: false
+   Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+   
+   Example 3:
+   Input: 10
+   Output: false
+   Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+   ```
+
+3. **算法：**
+
+   python
+
+   ​	将输入数据转换成一个字符串，然后逆序看是否一致。
+
+   ​	python代码：
+
+   ```python
+   class Solution(object):
+       def isPalindrome(self, x):
+           strx = str(x) 
+         
+           r = strx [: : -1] 
+           if strx == r:
+               return True
+           else:
+               return False
+   ```

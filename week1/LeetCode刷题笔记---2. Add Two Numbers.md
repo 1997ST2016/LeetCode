@@ -1,0 +1,91 @@
+### LeetCode刷题笔记---2. Add Two Numbers
+
+[题目来源]: https://leetcode.com/problems/add-two-numbers/
+
+1. **题目描述：**
+
+   ​	给定两个非空链表S1、S2，各代表一个非负整数，顺序从低位（个位）到高位，请计算两个整数的和，并返回成链表形式。
+
+   ​	注意：数据中两个整数的开头都不为0（除了整数0本身）。
+
+2. **样例：**
+
+   ```
+   Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+   Output: 7 -> 0 -> 8
+   Explanation: 342 + 465 = 807.
+   ```
+
+3. **算法：**
+
+   （一）C++
+
+   ​	这是一道模拟加法题。
+
+   ​	加法规则：低位满10向高位进1；如果最高位有进位，则需在最前面补1.
+
+   ​	C++代码：
+
+   ```c++
+   class Solution {
+   public:
+       ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+           ListNode *head = new ListNode(-1);   //添加虚拟头结点，简化首尾的处理
+           ListNode *cur = head;
+           int carry = 0;  //表示进位
+           while (l1 || l2) 
+           {
+               int n1 = l1 ? l1->val : 0;
+               int n2 = l2 ? l2->val : 0;
+               int sum = n1 + n2 + carry;
+               carry = sum / 10;
+               cur->next = new ListNode(sum % 10);
+               cur = cur->next;
+               if (l1) l1 = l1->next;
+               if (l2) l2 = l2->next;
+           }
+           if (carry) cur->next = new ListNode(1); //如果最高位有进位，则需在最前面补1.
+           return head->next;   //返回真正的头结点
+       }
+   };
+   ```
+
+   （二）python
+
+   ​	题目意在模拟加法运算，只需要从低位（链表第一位）开始，同位相加，满10往高位（链表下一位）进1。
+
+   ​	python代码：
+
+   ```python
+   # Definition for singly-linked list.
+   # class ListNode(object):
+   #     def __init__(self, x):
+   #         self.val = x
+   #         self.next = None
+   
+   class Solution(object):
+       def addTwoNumbers(self, s1, s2):
+           """
+           :type s1: ListNode
+           :type s2: ListNode
+           :rtype: ListNode
+           """
+           
+           ans = ListNode(0)
+           temp = ans
+           tempsum = 0
+           while True:
+               if s1 != None:
+                   tempsum += s1.val
+                   s1 = s1.next
+               if s2 != None:
+                   tempsum += s2.val
+                   s2 = s2.next
+               temp.val = tempsum % 10
+               tempsum //= 10     #temp除以10的结果向负无穷大取整
+               if s1 == None and s2 == None and tempsum == 0:
+                   break
+               temp.next = ListNode(0)
+               temp = temp.next
+           return ans
+   ```
