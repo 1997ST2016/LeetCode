@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### LeetCode刷题笔记---1. Two Sum
 
 [题目来源]: https://leetcode.com/problems/two-sum/
@@ -77,9 +76,7 @@
                    return (dict[target-nums[i]],i)
            i = i+1
    ```
-=======
-### LeetCode刷题笔记---1. Two Sum
-
+LeetCode刷题笔记---1. Two Sum
 [题目来源]: https://leetcode.com/problems/two-sum/
 
 1. **题目描述：**
@@ -156,4 +153,3 @@
                    return (dict[target-nums[i]],i)
            i = i+1
    ```
->>>>>>> 4e53b0542781705cec43ee33ffa151539d74da7a
